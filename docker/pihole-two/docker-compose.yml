@@ -5,24 +5,20 @@ services:
     container_name: pihole
     image: pihole/pihole:latest
     hostname: ${HOSTNAME}
-#     cap_add: # Uncomment if you want to use Pi-Hole for DHCP
-#       - NET_ADMIN
     ports:
       - 53/tcp
       - 53/udp
-#       - 67/udp # Uncomment if you want to use Pi-Hole for DHCP
       - 80/tcp
     environment:
       - FTLCONF_LOCAL_IPV4=${PIHOLE_MACVLAN_IP}
       - WEBPASSWORD=${WEBPASSWORD}
       - PIHOLE_DNS_=${UNBOUND_MACVLAN_IP}
       - TZ=${TIMEZONE}
-      - WEBTHEME=${WEBTHEME}
       - DNSMASQ_USER=root
       - DNSMASQ_LISTENING=local
     volumes:
-      - /volume1/docker/pihole-alexandria/pihole/pihole:/etc/pihole:rw
-      - /volume1/docker/pihole-alexandria/pihole/dnsmasq.d:/etc/dnsmasq.d/:rw
+      - ~/pihole:/etc/pihole:rw
+      - ~/dnsmasq.d:/etc/dnsmasq.d/:rw
     networks:
       macvlan:
         ipv4_address: ${PIHOLE_MACVLAN_IP}
