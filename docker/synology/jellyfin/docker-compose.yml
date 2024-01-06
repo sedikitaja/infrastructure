@@ -3,13 +3,12 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin-test
-    #user: 1000:1000
+    user: 1026:100
     network_mode: 'host'
     volumes:
-      - /home/grant/.config/jellyfin/config:/config
-      - /home/grant/.cache/jellyfin:/cache
-      - /mnt/3717503d-cdf6-442d-866e-0adef17cb7c4/Media:/media
-      - /path/to/media2:/media2:ro
+      - /volume1/docker/jellyfin/config:/config
+      - /volume1/docker/jellyfin/cache:/cache
+      - /volume1/media:/media
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     environment:
