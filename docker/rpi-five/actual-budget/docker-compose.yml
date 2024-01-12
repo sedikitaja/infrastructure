@@ -5,5 +5,5 @@ services:
     ports:
       - '${ACTUAL_PORT}:5006'
     volumes:
-      - ~/data:/data
+      - ${ACTUAL_DATA_DIRECTORY}:/data
     restart: unless-stopped
