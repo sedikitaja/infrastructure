@@ -10,15 +10,15 @@ services:
     networks:
       - librum
     volumes:
-      - librum:/var/lib/librum-server/librum_storage
+      - ${LIBRUM_CONFIG_DIRECTORY}:/var/lib/librum-server/librum_storage
     environment:
       - JWTValidIssuer=exampleIssuer          # Optional. You can leave it as-is
       - JWTKey=exampleOfALongSecretToken      # Optional. You can leave it as-is
       - SMTPEndpoint=${LIBRUM_MAIL_SMTP}         # Example for Gmail: smtp.gmail.com:587
-      - SMTPUsername=${LIBRUM_MAIL_USER}             
+      - SMTPUsername=${LIBRUM_MAIL_USER}
       - SMTPPassword=${LIBRUM_MAIL_PASSWORD}
       - SMTPMailFrom=${LIBRUM_MAIL_EMAIL}
-      - DBConnectionString=Server=mariadb;port=3306;Database=librum;Uid=librum;Pwd=mariadb;
+      - DBConnectionString=Server=mariadb;port=3306;Database=${LIBRUM_DB_NAME};Uid=${LIBRUM_DB_USER};Pwd=${LIBRUM_DB_PASSWORD};
       - AdminEmail=${LIBRUM_ADMIN_EMAIL}          # Admin login username
       - AdminPassword=${LIBRUM_ADMIN_PASSWORD}      # Admin login password
     restart: unless-stopped
@@ -33,15 +33,15 @@ services:
     networks:
       - librum
     volumes:
-      - librum_db:/var/lib/mysql
+      - ${LIBRUM_DB_DIRECTORY}:/var/lib/mysql
     environment:
-      - MARIADB_USER=librum
-      - MARIADB_PASSWORD=mariadb
-      - MARIADB_DATABASE=librum
-      - MARIADB_ROOT_PASSWORD=mariadb
+      - MARIADB_USER=${LIBRUM_DB_USER}
+      - MARIADB_PASSWORD=${LIBRUM_DB_PASSWORD}
+      - MARIADB_DATABASE=${LIBRUM_DB_NAME}
+      - MARIADB_ROOT_PASSWORD=${LIBRUM_DB_PASSWORD}
     restart: unless-stopped
     healthcheck:                              # Ensures the DB is up before the server.
-      test: ["CMD", "mariadb-admin", "ping", "-u", "librum", "-p'mariadb'", "-h", "localhost"]
+      test: ["CMD", "mariadb-admin", "ping", "-u", "${LIBRUM_DB_USER}", "-p${LIBRUM_DB_PASSWORD}", "-h", "localhost"]
       interval: 20s
       timeout: 40s
       retries: 3
