@@ -10,4 +10,4 @@ This can be resolved by following the steps [here](https://github.com/Librum-Rea
 
 ## Librum reader
 
-Config files can be found at `.var/app/com.librumreader.librum/config/Librum-Reader/Librum.conf`. Default settings and more can be found [here](.var/app/com.librumreader.librum/config/Librum-Reader/Librum.conf).
+Config files can be found at `.var/app/com.librumreader.librum/config/Librum-Reader/Librum.conf`. Default settings and more can be found [here](https://github.com/Librum-Reader/Librum-Server/blob/main/self-hosting/self-host-installation.md#configuration-for-the-client-application).
