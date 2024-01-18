@@ -7,11 +7,11 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - APP_URL=${ADDRESS}
+      - APP_URL=${BOOKSTACK_IP_ADDRESS}
       - DB_HOST=bookstack_db
       - DB_PORT=3306
-      - DB_USER=bookstack
-      - DB_PASSWORD=${PASSWORD}
+      - DB_USER=${BOOKSTACK_USER}
+      - DB_PASSWORD=${BOOKSTACK_PASSWORD}
       - DB_DATABASE=bookstackapp
     volumes:
       - ${BOOKSTACK_CONFIG_DIRECTORY}:/config
@@ -26,11 +26,11 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - MYSQL_ROOT_PASSWORD=${PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${BOOKSTACK_PASSWORD}
       - TZ=Europe/Amsterdam
       - MYSQL_DATABASE=bookstackapp
-      - MYSQL_USER=bookstack
-      - MYSQL_PASSWORD=${PASSWORD}
+      - MYSQL_USER=${BOOKSTACK_USER}
+      - MYSQL_PASSWORD=${BOOKSTACK_PASSWORD}
     volumes:
       - ${BOOKSTACK_DB_DIRECTORY}:/db-config
     ports:
