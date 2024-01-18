@@ -14,7 +14,7 @@ services:
       - DB_PASSWORD=${PASSWORD}
       - DB_DATABASE=bookstackapp
     volumes:
-      - /home/grant/docker/bookstack/config:/config
+      - ${BOOKSTACK_CONFIG_DIRECTORY}:/config
     ports:
       - 6875:80
     restart: unless-stopped
@@ -32,7 +32,7 @@ services:
       - MYSQL_USER=bookstack
       - MYSQL_PASSWORD=${PASSWORD}
     volumes:
-      - /home/grant/docker/bookstack/db-config:/config
+      - ${BOOKSTACK_DB_DIRECTORY}:/db-config
     ports:
       - 6876:3306
     restart: unless-stopped
