@@ -14,7 +14,7 @@ services:
       - DB_PASSWORD=${BOOKSTACK_PASSWORD}
       - DB_DATABASE=bookstackapp
     volumes:
-      - ${BOOKSTACK_CONFIG_DIRECTORY}:/config
+      - bookstack-app-data:/config
     ports:
       - 6875:80
     restart: unless-stopped
@@ -32,7 +32,13 @@ services:
       - MYSQL_USER=${BOOKSTACK_USER}
       - MYSQL_PASSWORD=${BOOKSTACK_PASSWORD}
     volumes:
-      - ${BOOKSTACK_DB_DIRECTORY}:/db-config
+      - bookstack-db-data:/db-config
     ports:
       - 6876:3306
     restart: unless-stopped
+
+volumes:
+  bookstack-db-data:
+    name: "bookstack-db-data"
+  bookstack-app-data:
+    name: "bookstack-app-data"
