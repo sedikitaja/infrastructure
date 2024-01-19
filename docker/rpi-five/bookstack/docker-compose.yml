@@ -10,18 +10,18 @@ services:
       - APP_URL=${BOOKSTACK_IP_ADDRESS}
       - DB_HOST=bookstack_db
       - DB_PORT=3306
-      - DB_USER=${BOOKSTACK_USER}
-      - DB_PASSWORD=${BOOKSTACK_PASSWORD}
+      - DB_USER=bookstack
+      - DB_PASS=${BOOKSTACK_PASSWORD}
       - DB_DATABASE=bookstackapp
     volumes:
-      - bookstack-app-data:/config
+      - ./bookstack_app_data:/config
     ports:
       - 6875:80
     restart: unless-stopped
     depends_on:
       - bookstack_db
   bookstack_db:
-    image: mariadb
+    image: lscr.io/linuxserver/mariadb
     container_name: bookstack_db
     environment:
       - PUID=1000
@@ -29,16 +29,8 @@ services:
       - MYSQL_ROOT_PASSWORD=${BOOKSTACK_PASSWORD}
       - TZ=Europe/Amsterdam
       - MYSQL_DATABASE=bookstackapp
-      - MYSQL_USER=${BOOKSTACK_USER}
+      - MYSQL_USER=bookstack
       - MYSQL_PASSWORD=${BOOKSTACK_PASSWORD}
     volumes:
-      - bookstack-db-data:/db-config
-    ports:
-      - 6876:3306
+      - ./bookstack_db_data:/config
     restart: unless-stopped
-
-volumes:
-  bookstack-db-data:
-    name: "bookstack-db-data"
-  bookstack-app-data:
-    name: "bookstack-app-data"
