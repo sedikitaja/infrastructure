@@ -10,7 +10,7 @@ services:
       - APP_URL=${BOOKSTACK_IP_ADDRESS}
       - DB_HOST=bookstack_db
       - DB_PORT=3306
-      - DB_USER=bookstack
+      - DB_USER=${BOOKSTACK_USER}
       - DB_PASS=${BOOKSTACK_PASSWORD}
       - DB_DATABASE=bookstackapp
     volumes:
@@ -29,7 +29,7 @@ services:
       - MYSQL_ROOT_PASSWORD=${BOOKSTACK_PASSWORD}
       - TZ=Europe/Amsterdam
       - MYSQL_DATABASE=bookstackapp
-      - MYSQL_USER=bookstack
+      - MYSQL_USER=${BOOKSTACK_USER}
       - MYSQL_PASSWORD=${BOOKSTACK_PASSWORD}
     volumes:
       - ./bookstack_db_data:/config
